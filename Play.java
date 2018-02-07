@@ -9,7 +9,7 @@ public class Play {
                 Scanner sc = new Scanner(System.in);
                 int userChoice = 0;
                 while(userChoice == 0){
-			System.out.println("Would you like to enable GUI for this game?");
+			System.out.println("Would you like to enable GUI for this game? (Yes/No)");
 			String mmchoice = sc.nextLine();
 			switch (mmchoice.toUpperCase()) {
 			case "YES":  userChoice = 1;
@@ -35,6 +35,7 @@ public class Play {
 				game.showGame();
 				System.out.println("You have "+game.getPlayerBalance()+"$, how much would you like to bet? (10/20/30)");
 				int userBet = 0;
+				int didWin = 0;
 				while(userBet == 0){
 					String betVal = sc.nextLine();
 					switch (betVal) {
@@ -52,14 +53,29 @@ public class Play {
 					if(userBet == 1){
 						game.bet(10);
 						game.rollAll();
+						didWin = game.winTest();
+						if (didWin > 0){
+							int winnings = game.winnings(10,didWin);
+							game.collectWinnings(winnings);
+						}
 					}
 					if(userBet == 2){
 						game.bet(20);
 						game.rollAll();
+						didWin = game.winTest();
+						if (didWin > 0){
+							int winnings = game.winnings(20,didWin);
+							game.collectWinnings(winnings);
+						}
 					}
 					if(userBet == 3){
 						game.bet(30);
 						game.rollAll();
+						didWin = game.winTest();
+						if (didWin > 0){
+							int winnings = game.winnings(30,didWin);
+							game.collectWinnings(winnings);
+						}
 					}
 				}
 			}
